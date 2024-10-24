@@ -1,17 +1,23 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+  .oi
+    PageHome    
+    PageTi
+    PageRh
+    PageSesmt
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import PageHome from './views/Home.vue'
+import PageTi from './views/Ti.vue'
+import PageRh from './views/Rh.vue'
+import PageSesmt from './views/Sesmt.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PageHome,
+    PageTi,
+    PageRh,
+    PageSesmt
   }
 }
 </script>
