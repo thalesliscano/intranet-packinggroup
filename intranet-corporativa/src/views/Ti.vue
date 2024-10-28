@@ -1,9 +1,14 @@
 <template lang="pug">
-    h1 Ti
+.ti-container
+    NavComponente
 </template>
 ]
 <script>
+import NavComponente from "../components/Ti/Nav.vue"
 export default{
     name: "PageTi",
+    components: {
+        NavComponente
+    }
 }
 </script>

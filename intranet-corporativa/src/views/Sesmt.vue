@@ -1,9 +1,14 @@
 <template lang="pug">
-    h1 Sesmt
+.sesmt-container
+    NavComponente
 </template>
 ]
 <script>
+import NavComponente from "../components/Sesmt/Nav.vue"
 export default{
-    name: "PageSesmt",
+    name: "PageSesmt",    
+    components: {
+        NavComponente   
+    }
 }
 </script>
