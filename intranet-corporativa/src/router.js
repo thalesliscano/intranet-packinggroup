@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from 'vue-router';
 import PageHome from "./views/Home.vue";
-import PageTi from "./views/Ti.vue";
+import PageDocumentacao from "./views/Documentacao.vue";
 import PageSesmt from "./views/Sesmt.vue";
 import PageRh from "./views/Rh.vue";
 import PageTreinamento from "./views/Treinamento.vue"
@@ -17,9 +17,9 @@ const router = new Router({
             component: PageHome
         },
         {
-            path: "/ti",
+            path: "/documentacao",
             name: "TI",
-            component: PageTi,
+            component: PageDocumentacao,
         },
         {
             path: "/treinamentos",

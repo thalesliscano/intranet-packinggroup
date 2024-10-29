@@ -1,12 +1,10 @@
 <template lang="pug">
-.rh-container
-    NavComponente
+.documentacao-container
 </template>
 ]
 <script>
-
 export default{
-    name: "PageRh",
+    name: "PageDocumentacao",
     components: {
     }
 }
