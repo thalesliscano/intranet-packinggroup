@@ -1,27 +1,26 @@
 <template lang="pug">
-header.container-nav-rh
-    nav.nav-rh
+header.container-nav-treinamento
+    nav.nav-treinamento
         router-link.link-to-home(to="/")
             img.logo(src="https://packinggroup.com.br/imagens/logo-packing-group.png" alt="logo")
         .conteudo-navegacao
-            .background-btn
-                NavComponenteSelect
-</template>
+            NavComponenteSelect
+</template>     
 
 <script>
 import NavComponenteSelect from "../NavComponenteSelect.vue";
-export default {
+export default{
     // eslint-disable-next-line vue/multi-word-component-names
     name: "NavComponente",
     components: {
         NavComponenteSelect
     },
-    data() {
+    data(){
         return {
             btnInformacao: [
-                { texto: "TI", path: "ti" },
-                { texto: "RH", path: "rh" },
-                { texto: "SESMT", path: "sesmt" }
+                {texto: "TI", path: "ti"},
+                {texto: "RH",path: "rh"},
+                {texto: "SESMT",path: "sesmt"}
             ]
         }
     }
@@ -29,14 +28,15 @@ export default {
 </script>
 
 <style lang="scss">
-.container-nav-rh{
+.container-nav-treinamento{
     width: 1200px;
-    margin: 0 auto;
-    .nav-rh {
+    margin: 0 auto; 
+    .nav-treinamento {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 40px 0 0 0;
+        position: relative;
 
         .link-to-home {
             display: flex;

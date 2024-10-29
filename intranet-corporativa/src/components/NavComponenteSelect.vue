@@ -14,7 +14,8 @@ data() {
             { texto: "HOME", path: "/" },
             { texto: "TI", path: "/ti" },
             { texto: "RH", path: "/rh" },
-            { texto: "SESMT", path: "/sesmt" }
+            { texto: "SESMT", path: "/sesmt" },
+            // { texto: "TREINAMENTOS", path: "/ti/treinamentos" },
         ],
         showDropdown: false // Controla a exibição do dropdownd
     };
@@ -58,10 +59,10 @@ methods: {
         display: block;
         position: absolute;
         background-color: #f9f9f9;
-        width: 100%;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
-
+        width: 100%;
+        text-align: center;
 
         .option-itens {
             color: #0f2034;

@@ -4,6 +4,7 @@ import PageHome from "./views/Home.vue";
 import PageTi from "./views/Ti.vue";
 import PageSesmt from "./views/Sesmt.vue";
 import PageRh from "./views/Rh.vue";
+import PageTreinamento from "./views/Treinamento.vue"
 
 Vue.use(Router);
 
@@ -18,7 +19,12 @@ const router = new Router({
         {
             path: "/ti",
             name: "TI",
-            component: PageTi
+            component: PageTi,
+        },
+        {
+            path: "/treinamentos",
+            name: "TREINAMENTOS",
+            component: PageTreinamento
         },
         {
             path: "/rh",
