@@ -1,8 +1,7 @@
 <template lang="pug">
 .rh-container
-    NavComponente
 </template>
-]
+
 <script>
 
 export default{

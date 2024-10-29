@@ -1,13 +1,14 @@
 <template lang="pug">
 .home-container
-    
+    NoticiaCarrousel
 </template> 
 
 <script>
+import NoticiaCarrousel from "../components/Home/NoticiasCarousel.vue"
 export default{
-    // eslint-disable-next-line vue/multi-word-component-names
     name: "PageHome",
     components: {
+        NoticiaCarrousel
     }
 }
 </script>
