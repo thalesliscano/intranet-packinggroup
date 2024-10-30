@@ -1,22 +1,21 @@
 <template lang="pug">
-div#carrousel(ref="carrousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
-    div.carousel-fixed-item.center.middle-indicator
-      div.left
-        a.movePrevCarousel.middle-indicator-text.waves-effect.waves-light.content-indicator(@click="prev")
-          i.material-icons.left.middle-indicator-text chevron_left
-      div.right
-        a.moveNextCarousel.middle-indicator-text.waves-effect.waves-light.content-indicator(@click="next")
-          i.material-icons.right.middle-indicator-text chevron_right
+div#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
+    div.carousel-controls.center
+        div.carousel-prev
+            a.prev-button.middle-indicator-text(@click="prev")
+                i.material-icons.left chevron_left
+        div.carousel-next
+            a.next-button.middle-indicator-text(@click="next")
+                i.material-icons.right chevron_right
 
-    div.carousel-item(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }")
-      h2 {{ slide.title }}
-      p {{ slide.description }}
+    div.carousel-slide(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }")
+        img.img-content-slide(:src="slide.path")
     
-    ul.carrousel-picto
-      li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
+    ul.carousel-indicators
+        li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
         span
-
 </template>
+    
 
 
 <script>
@@ -28,9 +27,9 @@ export default {
             isDragging: false,
             startX: 0,
             slides: [
-                { title: "First Panel", description: "This is your first panel." },
-                { title: "Second Panel", description: "This is your second panel." },
-                { title: "Third Panel", description: "This is your third panel." },
+                { title: "First Panel", path: require("../../assets/banner-seguranca.png") },
+                { title: "Second Panel", path: require("../../assets/img2.jpg") },
+                { title: "Third Panel", path: require("../../assets/img3.jpg") },
             ],
         };
     },
@@ -90,22 +89,22 @@ export default {
 
 
     mounted() {
-        this.play();
-        const carrousel = this.$refs.carrousel;
-        carrousel.addEventListener("mouseover", this.stop);
-        carrousel.addEventListener("mouseout", this.play);
-    },
+    this.play();
+    const carousel = this.$refs.carousel; // Nome correto do ref
+    carousel.addEventListener("mouseover", this.stop);
+    carousel.addEventListener("mouseout", this.play);
+},
     beforeDestroy() {
         this.stop();
-        const carrousel = this.$refs.carrousel;
-        carrousel.removeEventListener("mouseover", this.stop);
-        carrousel.removeEventListener("mouseout", this.play);
+        const carousel = this.$refs.carousel; // Nome correto do ref
+        carousel.removeEventListener("mouseover", this.stop);
+        carousel.removeEventListener("mouseout", this.play);
     },
 };
 </script>
 
 <style lang="scss" scoped>
-#carrousel {
+#carousel {
     width: 1000px;
     height: 400px;
     margin: 0 auto;
@@ -113,13 +112,13 @@ export default {
     overflow: hidden;
     background-color: white;
     user-select: none;
-    -webkit-user-select: none; // Safari
-    -moz-user-select: none; // Firefox
-    -ms-user-select: none; // Internet Explorer/Edge
     cursor: pointer;
     margin-top: 50px;
+    border: solid 1px #0f2034;
 
-    .carousel-item {
+
+    .carousel-slide {
+        overflow: hidden;
         position: absolute;
         top: 0;
         left: 0;
@@ -135,9 +134,13 @@ export default {
         &.active {
             opacity: 1;
         }
+        .img-content-slide{
+            width: 100%;
+            height: 100%;
+        }
     }
 
-    .carrousel-picto {
+    .carousel-indicators {
         position: absolute;
         left: 50%;
         bottom: 20px;
@@ -145,7 +148,6 @@ export default {
         transform: translateX(-50%);
         padding: 0;
         margin: 0;
-
 
         li {
             display: inline-block;
@@ -163,7 +165,7 @@ export default {
         }
     }
 
-    .carousel-fixed-item {
+    .carousel-controls {
         position: absolute;
         top: 10px;
         width: 100%;
@@ -171,8 +173,8 @@ export default {
         justify-content: space-between;
         padding: 0 20px;
 
-        .movePrevCarousel,
-        .moveNextCarousel {
+        .prev-button,
+        .next-button {
             cursor: pointer;
             color: white;
             font-size: 24px;
@@ -180,3 +182,4 @@ export default {
     }
 }
 </style>
+

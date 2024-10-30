@@ -1,14 +1,17 @@
 <template lang="pug">
 .home-container
     NoticiaCarrousel
+    SessaoImportante
 </template> 
 
 <script>
 import NoticiaCarrousel from "../components/Home/NoticiasCarousel.vue"
+import SessaoImportante from "../components/Home/SessaoImportantes.vue"
 export default{
     name: "PageHome",
     components: {
-        NoticiaCarrousel
+        NoticiaCarrousel,
+        SessaoImportante
     }
 }
 </script>
