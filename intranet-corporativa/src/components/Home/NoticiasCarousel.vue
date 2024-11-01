@@ -1,5 +1,5 @@
 <template lang="pug">
-div#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
+section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
     div.carousel-controls.center
         div.carousel-prev
             a.prev-button.middle-indicator-text(@click="prev")
@@ -9,7 +9,7 @@ div#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleav
                 i.material-icons.right chevron_right
 
     div.carousel-slide(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }")
-        img.img-content-slide(:src="slide.path")
+        img.img-content-slide(:src="slide.path" draggable="false")
     
     ul.carousel-indicators
         li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
@@ -83,7 +83,7 @@ export default {
         },
         play() {
             this.stop();
-            this.timer = setInterval(this.next, 5000);
+            this.timer = setInterval(this.next, 4500);
         },
     },
 
@@ -115,6 +115,8 @@ export default {
     cursor: pointer;
     margin-top: 50px;
     border: solid 1px #0f2034;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 
     .carousel-slide {
@@ -130,6 +132,8 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        border-radius: 20px;
+        cursor: grab;
 
         &.active {
             opacity: 1;

@@ -24,8 +24,18 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/rawline');
+
 body{
-  background-color: #cedaff;
+  background-color: #fdfdff;
+  font-family: Rawline, Raleway, 'Open Sans', sans-serif, Arial, Helvetica !important;
+}
+ul, li {
+  list-style: none;
+}
+a{
+  text-decoration: none;
 }
 *{
   margin: 0px;

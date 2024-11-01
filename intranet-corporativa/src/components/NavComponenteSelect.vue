@@ -5,15 +5,15 @@ header.container-nav-ti
             img.logo(src="https://packinggroup.com.br/imagens/logo-packing-group.png" alt="logo")
         .conteudo-navegacao
             .background-btn
-                router-link(to="/" exact ).btn-treinamento Home
+                router-link(to="/" exact ).btn-navegacao Home
             .background-btn
-                router-link(to="/rh").btn-treinamento Rh
+                router-link(to="/rh").btn-navegacao Rh
             .background-btn
-                router-link(to="/sesmt").btn-treinamento Sesmt
+                router-link(to="/sesmt").btn-navegacao Sesmt
             .background-btn
-                router-link(to="/documentacao").btn-treinamento Documentação
+                router-link(to="/documentacao").btn-navegacao Documentação
             .background-btn
-                router-link(to="/treinamento").btn-treinamento Treinamento
+                router-link(to="/treinamento").btn-navegacao Treinamento
             //- .background-btn
             //-     NavComponenteSelect
             //- .background-btn
@@ -106,14 +106,17 @@ export default {
 
 <style lang="scss" scoped>
 .container-nav-ti {
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
 
     .nav-ti {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 40px 0 0 0;
+        margin: 30px 0 0 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 5px 50px 5px 50px;
+
 
         .link-to-home {
             display: flex;
@@ -129,8 +132,9 @@ export default {
             align-items: center;
             gap: 40px;
             position: relative;
+
             // left: -120px;
-            .router-link{
+            .router-link {
                 background-color: #fff;
             }
         }
@@ -257,33 +261,41 @@ export default {
             }
         }
 
-        .btn-treinamento {
-    background-color: #fff; /* Cor padrão */
-    color: #0f2034; /* Cor do texto padrão */
-    width: 100%;
-    font-weight: bold;
-    padding: 8px 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    text-decoration: none;
+        .btn-navegacao {
+            background-color: #fff;
+            /* Cor padrão */
+            color: #0f2034;
+            /* Cor do texto padrão */
+            width: 100%;
+            font-weight: bold;
+            padding: 8px 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            text-decoration: none;
+            border-radius: 5px;
 
-    &:hover {
-        background-color: #0a1625;
-        color: white; /* Muda a cor do texto ao passar o mouse */
-    }
+            &:hover {
+                background-color: #0a1625;
+                color: white;
+                /* Muda a cor do texto ao passar o mouse */
+            }
 
-    &.router-link-active {
-        background-color: #0f2034; /* Cor de fundo quando ativo */
-        color: #ffffff; /* Cor do texto quando ativo */
-    }
+            &.router-link-active {
+                background-color: #0f2034;
+                /* Cor de fundo quando ativo */
+                color: #ffffff;
+                /* Cor do texto quando ativo */
+            }
 
-    &.router-link-exact-active {
-        background-color: #0f2034; /* Cor de fundo quando ativo exato */
-        color: #ffffff; /* Cor do texto quando ativo exato */
-    }
-}
+            &.router-link-exact-active {
+                background-color: #0f2034;
+                /* Cor de fundo quando ativo exato */
+                color: #ffffff;
+                /* Cor do texto quando ativo exato */
+            }
+        }
 
     }
 }
