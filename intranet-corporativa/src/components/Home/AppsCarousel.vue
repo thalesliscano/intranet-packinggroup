@@ -132,6 +132,8 @@ export default {
     .titulo {
         font-size: 30px;
         text-align: center;
+        position: relative;
+        top: 30px;
     }
 
     #carousel {
@@ -145,7 +147,6 @@ export default {
         user-select: none;
         cursor: pointer;
         margin-top: 50px;
-        border: solid 1px #0f2034;
         border-radius: 20px;
 
         .carousel-slide {

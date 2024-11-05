@@ -37,7 +37,6 @@ export default{
 
 <style lang="scss">
 .atalhos-container {
-    border-top: 5px solid #0f2034;
     margin-top: 50px;
     .titulo-atalhos {
         margin-top: 30px;
