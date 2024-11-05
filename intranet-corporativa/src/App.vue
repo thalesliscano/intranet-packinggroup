@@ -1,6 +1,6 @@
 <template lang="pug">
 .container
-  NavComponenteSelect
+  NavComponenteSelect.nav
   <router-view></router-view>
 </template>
 
@@ -41,11 +41,19 @@ a{
   margin: 0px;
   padding: 0px;
 }
-#app {
+.container {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  width: 1400px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  margin-top: 100px;
+  .nav{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    background-color: #fff;
+  }
 }
 </style>

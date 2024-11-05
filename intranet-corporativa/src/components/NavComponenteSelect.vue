@@ -113,7 +113,6 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 30px 0 0 0;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         padding: 5px 50px 5px 50px;
 

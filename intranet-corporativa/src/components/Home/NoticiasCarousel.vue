@@ -116,8 +116,6 @@ export default {
     margin-top: 50px;
     border: solid 1px #0f2034;
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
 
     .carousel-slide {
         overflow: hidden;
