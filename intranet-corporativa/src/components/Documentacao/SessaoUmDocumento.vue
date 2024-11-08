@@ -1,7 +1,12 @@
 <template lang="pug">
 main.container-sessao-documento
+    .descricao
+        p 
+            | A página de documentação foi criada para centralizar documentos importantes da empresa sobre segurança da informação, TI e software. Dividida em seções como "Segurança da Informação", "TI Aleph" e "TI Infra", permite que os usuários encontrem rapidamente manuais, políticas e guias essenciais para o dia a dia.
+        br
+        p
+            | Os documentos estão organizados em cartões que podem ser expandidos para mostrar links diretos de acesso. A interface é simples e intuitiva, facilitando a navegação e garantindo que todos tenham acesso rápido e fácil às informações necessárias.
     div.card-list
-        h1 Documentação e Manuais de Procedimentos por Setor
         div.card(v-for="(item, index) in items" :key="index")
             div.card-header(@click="toggleAccordion(index)")
                 h2 {{ item.title }}
@@ -22,10 +27,10 @@ export default {
             expandedIndices: [], // Keeps track of expanded card indices
             items: [
                 {
-                    title: "TI INFRA",
+                    title: "SEGURANÇA DA INFORMAÇÃO",
                     links: [
-                        { label: "Instalção windowns e Aleph", url: "manual final.pdf" },
-                        { label: "Document2", url: "https://link-para-o-Document2.com" },
+                        { label: "Document", url: "https://link-para-o-driver-2.com" },
+                        { label: "Document2", url: "https://link-para-o-Document2-2.com" },
                     ],
                 },
                 {
@@ -36,38 +41,10 @@ export default {
                     ],
                 },
                 {
-                    title: "SEGURANÇA DA INFORMAÇÃO",
+                    title: "TI INFRA",
                     links: [
-                        { label: "Document", url: "https://link-para-o-driver-2.com" },
-                        { label: "Document2", url: "https://link-para-o-Document2-2.com" },
-                    ],
-                },
-                {
-                    title: "RH",
-                    links: [
-                        { label: "Document", url: "https://link-para-o-driver-2.com" },
-                        { label: "Document2", url: "https://link-para-o-Document2-2.com" },
-                    ],
-                },
-                {
-                    title: "SESMT",
-                    links: [
-                        { label: "Document", url: "https://link-para-o-driver-2.com" },
-                        { label: "Document2", url: "https://link-para-o-Document2-2.com" },
-                    ],
-                },
-                {
-                    title: "CONTROLE DE QUALIDADE",
-                    links: [
-                        { label: "Document", url: "https://link-para-o-driver-2.com" },
-                        { label: "Document2", url: "https://link-para-o-Document2-2.com" },
-                    ],
-                },
-                {
-                    title: "ESG",
-                    links: [
-                        { label: "Document", url: "https://link-para-o-driver-2.com" },
-                        { label: "Document2", url: "https://link-para-o-Document2-2.com" },
+                        { label: "Instalção windowns e Aleph", url: "manual final.pdf" },
+                        { label: "Document2", url: "https://link-para-o-Document2.com" },
                     ],
                 },
             ],
@@ -75,13 +52,10 @@ export default {
     },
     methods: {
         toggleAccordion(index) {
-            // Check if the index is already in the array
             const indexPosition = this.expandedIndices.indexOf(index);
             if (indexPosition > -1) {
-                // Remove the index if it's already expanded
                 this.expandedIndices.splice(indexPosition, 1);
             } else {
-                // Add the index to expandedIndices if not already present
                 this.expandedIndices.push(index);
             }
         },
@@ -105,7 +79,8 @@ export default {
         max-width: 800px;
         font-family: Arial, sans-serif;
         position: absolute;
-        left: 0px;
+        top: 150px;
+        left: -15px;
 
         .card {
             background: #f4f4f4;

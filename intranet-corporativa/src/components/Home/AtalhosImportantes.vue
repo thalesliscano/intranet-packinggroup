@@ -1,6 +1,5 @@
 <template lang="pug">
 section.atalhos-container
-    h1.titulo-atalhos Atalhos importantes
     main.lista-atalhos-container
         ul.lista-atalhos-itens
             li(v-for='item in itensAtalhos' :key="item.nome").item-atalho 
@@ -10,7 +9,9 @@ section.atalhos-container
                     p.item-nome {{item.nome}}
 
                 p.item-descricao {{ item.descricao}}
-                a(:href="item.link").item-link Clique aqui
+                a(:href="item.link" v-if="item.nome != 'Documentação'").item-link Clique aqui
+                router-link(to="/documentacao" v-else).item-link Clique aqui
+
 </template> 
     
 
@@ -25,6 +26,9 @@ export default{
                 },
                 {
                     nome: "Sistema de Chamado",link: "https://www.google.com", descricao: "O Sistema de Chamado permite o registro e acompanhamento de solicitações, facilitando a comunicação e resolução de problemas.", img: require("../../assets/logo-glpi-bleu-1.png")
+                },
+                {
+                    nome: "Documentação",link: "https://www.google.com", descricao: "Aletas e Manutenção envolvem o monitoramento e cuidado de equipamentos, assegurando sua operação adequada e prevenindo falhas.", img: require("../../assets/manutencao.png")
                 },
                 {
                     nome: "Aletas e Manutenção",link: "https://www.google.com", descricao: "Aletas e Manutenção envolvem o monitoramento e cuidado de equipamentos, assegurando sua operação adequada e prevenindo falhas.", img: require("../../assets/manutencao.png")

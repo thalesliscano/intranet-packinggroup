@@ -6,10 +6,6 @@ header.container-nav-ti
         .conteudo-navegacao
             .background-btn
                 router-link(to="/" exact ).btn-navegacao Home
-            //- .background-btn
-            //-     router-link(to="/rh").btn-navegacao Rh
-            //- .background-btn
-            //-     router-link(to="/sesmt").btn-navegacao Sesmt
             .background-btn
                 router-link(to="/documentacao").btn-navegacao Documentação
             .background-btn
