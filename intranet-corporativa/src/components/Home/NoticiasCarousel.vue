@@ -1,23 +1,25 @@
 <template lang="pug">
-section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
-    div.carousel-controls.center
-        div.carousel-prev
-            a.prev-button.middle-indicator-text(@click="prev")
-                i.material-icons.left chevron_left
-        div.carousel-next
-            a.next-button.middle-indicator-text(@click="next")
-                i.material-icons.right chevron_right
-
-    div.carousel-slide(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }")
-        img.img-content-slide(:src="slide.path" draggable="false")
+    section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
+        div.carousel-controls.center
+            div.carousel-prev
+                a.prev-button.middle-indicator-text(@click="prev")
+                    i.material-icons.left chevron_left
+            div.carousel-next
+                a.next-button.middle-indicator-text(@click="next")
+                    i.material-icons.right chevron_right
     
-    ul.carousel-indicators
-        li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
-        span
+        div.carousel-slide(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }")
+            router-link(:to="activeSlide.route" class="img-content-slide-link" @click.prevent="handleClick")
+                img.img-content-slide(:src="activeSlide.path" draggable="false")
+
+
+
+
+        ul.carousel-indicators
+            li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
+            span
 </template>
     
-
-
 <script>
 export default {
     data() {
@@ -27,9 +29,9 @@ export default {
             isDragging: false,
             startX: 0,
             slides: [
-                { title: "First Panel", path: require("../../assets/banner-seguranca.png") },
-                { title: "Second Panel", path: require("../../assets/img2.jpg") },
-                { title: "Third Panel", path: require("../../assets/img3.jpg") },
+                { title: "First Panel", path: require("../../assets/banner-seguranca.png"), route: "/pagina1" },
+                { title: "Second Panel", path: require("../../assets/img2.jpg"), route: "/pagina2" },
+                { title: "Third Panel", path: require("../../assets/img3.jpg"), route: "/pagina3" }
             ],
         };
     },
@@ -37,6 +39,9 @@ export default {
         nbSlide() {
             return this.slides.length;
         },
+        activeSlide() {
+            return this.slides[this.nbCurrent - 1];
+        }
     },
     methods: {
         gotoSlide(num) {
@@ -52,30 +57,30 @@ export default {
         startDrag(event) {
             this.isDragging = true;
             this.startX = event.clientX;
-            this.stop(); // Para o timer ao começar a arrastar
-            this.isSlideChanged = false; // Reseta o estado de mudança de slide
+            this.stop();
+            this.isSlideChanged = false;
         },
         endDrag() {
-            if (this.isDragging) {
-                this.isDragging = false;
-                // Reinicia o timer
-                this.play();
-            }
-        },
+    if (this.isDragging) {
+        this.isDragging = false;
+        setTimeout(() => {
+            this.play();
+        }, 100); // Atraso de 100 ms para evitar cliques acidentais
+    }
+},
+
         drag(event) {
             if (!this.isDragging) return;
 
             const diff = event.clientX - this.startX;
-
-            // Se o movimento for maior que 100px e a mudança de slide não foi feita
             if (Math.abs(diff) > 100 && !this.isSlideChanged) {
-                this.isSlideChanged = true; // Define que a mudança de slide foi feita
+                this.isSlideChanged = true;
                 if (diff > 0) {
                     this.prev();
                 } else {
                     this.next();
                 }
-                this.startX = event.clientX; // Atualiza a posição de início
+                this.startX = event.clientX;
             }
         },
         stop() {
@@ -87,22 +92,22 @@ export default {
         },
     },
 
-
     mounted() {
-    this.play();
-    const carousel = this.$refs.carousel; // Nome correto do ref
-    carousel.addEventListener("mouseover", this.stop);
-    carousel.addEventListener("mouseout", this.play);
-},
+        this.play();
+        const carousel = this.$refs.carousel;
+        carousel.addEventListener("mouseover", this.stop);
+        carousel.addEventListener("mouseout", this.play);
+    },
     beforeDestroy() {
         this.stop();
-        const carousel = this.$refs.carousel; // Nome correto do ref
+        const carousel = this.$refs.carousel;
         carousel.removeEventListener("mouseover", this.stop);
         carousel.removeEventListener("mouseout", this.play);
     },
 };
 </script>
 
+    
 <style lang="scss" scoped>
 #carousel {
     width: 1000px;
@@ -136,7 +141,7 @@ export default {
         &.active {
             opacity: 1;
         }
-        .img-content-slide{
+        .img-content-slide {
             width: 100%;
             height: 100%;
         }
@@ -183,5 +188,7 @@ export default {
         }
     }
 }
+.no-pointer {
+    pointer-events: none;
+}
 </style>
-
