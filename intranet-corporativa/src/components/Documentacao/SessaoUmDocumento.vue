@@ -29,22 +29,29 @@ export default {
                 {
                     title: "SEGURANÇA DA INFORMAÇÃO",
                     links: [
-                        { label: "Document", url: "https://link-para-o-driver-2.com" },
-                        { label: "Document2", url: "https://link-para-o-Document2-2.com" },
+                        { label: "Cartilha-phishing", url: "Cartilha-phishing.pdf" },
+                        { label: "fasciculo-codigos-maliciosos", url: "fasciculo-codigos-maliciosos.pdf" },
+                        { label: "fasciculo-protecao-de-dados", url: "fasciculo-protecao-de-dados.pdf" },
+                        { label: "fasciculo-senhas", url: "fasciculo-senhas.pdf" },
+                        { label: "fasciculo-vazamento-de-dados", url: "fasciculo-vazamento-de-dados.pdf" },
                     ],
                 },
                 {
                     title: "TI ALEPH",
                     links: [
-                        { label: "Document", url: "https://link-para-o-driver-2.com" },
-                        { label: "Document2", url: "https://link-para-o-Document2-2.com" },
+                        { label: "Instalação do Aleph", url: "Instalação do Aleph.pdf" },
+                        { label: "Instalação do Aleph2", url: "Instalação do Aleph2.pdf" },
                     ],
                 },
                 {
                     title: "TI INFRA",
                     links: [
-                        { label: "Instalção windowns e Aleph", url: "manual final.pdf" },
-                        { label: "Document2", url: "https://link-para-o-Document2.com" },
+                        { label: "Como criar PST Local na maquina (arquivo)", url: "Como criar PST Local na maquina (arquivo).pdf" },
+                        { label: "Resposta Automática Exchange", url: "Resposta Automática Exchange.pdf" },
+                        { label: "Manual Instalações", url: "manual-instalacoes.pdf" },
+                        { label: "Manual de Acesso a pedidos online", url: "manual-acessar-pedidos-online.pdf" },
+                        { label: "Manual Atualização Prosoft", url: "Manual Atualização Prosoft.pdf" },
+                        { label: "Manual de Utilização para Usuario Zabbix", url: "Manual de Utilização para Usuario Zabbix.pdf" },
                     ],
                 },
             ],

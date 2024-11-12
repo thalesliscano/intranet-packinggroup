@@ -11,6 +11,7 @@ Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
+
     routes: [
         {
             path: "/",
@@ -28,7 +29,7 @@ const router = new Router({
             component: PageTreinamento
         },
         {
-            path: "/topicos-seguranca",
+            path: "/dicas-seguranca",
             name: "TOPICOS-SEGURANCA",
             component: TopicosSeguranca
         },
@@ -42,7 +43,11 @@ const router = new Router({
             name: "FASCICULO",
             component: FasciculoPage
         },
-    ]
+    ],
+    scrollBehavior() {
+        return { x: 0, y: 0 };  // Rola para o topo
+    }
+    
 })
 
 export default router;

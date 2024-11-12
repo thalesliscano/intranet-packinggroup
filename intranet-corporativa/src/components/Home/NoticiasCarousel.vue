@@ -1,23 +1,26 @@
 <template lang="pug">
-section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
-    div.carousel-controls.center
-        div.carousel-prev
-            a.prev-button.middle-indicator-text(@click="prev")
-                i.material-icons.left chevron_left
-        div.carousel-next
-            a.next-button.middle-indicator-text(@click="next")
-                i.material-icons.right chevron_right
+    div.carousel-container
+        div.carousel-left-button(@click="prev")
+            img(src="@/assets/right-arrow.svg")
 
-    div.carousel-slide(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }")
-        router-link(:to="activeSlide.route" 
-            :class="{'no-pointer': isDragging, 'clickable': !isDragging}" 
-            @click="handleClick")
-            img.img-content-slide(:src="activeSlide.path" draggable="false")
+        section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
+            div.carousel-controls.center
+            div.carousel-slide(
+                v-for="(slide, index) in slides"
+                :key="index"
+                :class="{ active: nbCurrent === index + 1, 'no-click': isDragging && nbCurrent !== index + 1 }"
+                :style="{ backgroundImage: `url(${slide.path})`, backgroundSize: slide.backgroundSize }"
+                @click="goToSlideRoute(slide.route)"
+            )
+    
+            ul.carousel-indicators
+                li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
+        
+        div.carousel-right-button(@click="next")
+            img(src="@/assets/right-arrow.svg")
+    </template>
+    
 
-    ul.carousel-indicators
-        li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
-
-</template>
 
 <script>
 export default {
@@ -25,12 +28,12 @@ export default {
         return {
             nbCurrent: 1,
             timer: null,
-            isDragging: false,
+            isDragging: false,  // Flag para controlar o estado de arrasto
             startX: 0,
             slides: [
-                { title: "First Panel", path: require("../../assets/banner-seguranca.png"), route: "/topicos-seguranca" },
-                { title: "Second Panel", path: require("../../assets/img2.jpg"), route: "/fasciculo" },
-                { title: "Third Panel", path: require("../../assets/img3.jpg"), route: "/ransomware" }
+                { title: "Third Panel", path: require("../../assets/img3.jpg"), route: "/ransomware", backgroundSize: "50% 80%" },
+                { title: "First Panel", path: require("../../assets/banner-seguranca.jpg"), route: "/dicas-seguranca", backgroundSize: "60% 70%" },
+                { title: "Second Panel", path: require("../../assets/img2.jpg"), route: "", backgroundSize: "cover" },
             ],
         };
     },
@@ -43,6 +46,15 @@ export default {
         }
     },
     methods: {
+        goToSlideRoute(route) {
+            if (!this.isDragging) {
+                const targetRoute = route || '/';  // Redireciona para '/home' se não houver um route
+                this.$router.push(targetRoute).then(() => {
+                    window.scrollTo(0, 0);  // Garante que a página será rolada para o topo
+                });
+            }
+        },
+
         gotoSlide(num) {
             if (num === this.nbCurrent) return;
             this.nbCurrent = num;
@@ -53,54 +65,44 @@ export default {
         prev() {
             this.nbCurrent = this.nbCurrent <= 1 ? this.nbSlide : this.nbCurrent - 1;
         },
-
-        handleClick(event) {
-            // Apenas previne o clique se o slide estiver sendo arrastado
-            if (this.isDragging) {
-                event.preventDefault();
-            } else {
-                console.log("thales")
-            }
-        },
-
         startDrag(event) {
-            this.isDragging = true;
-            this.startX = event.clientX;
-            this.stop();
-            this.isSlideChanged = false;
-        },
-        endDrag() {
-            if (this.isDragging) {
-                this.isDragging = false;
-                setTimeout(() => {
-                    this.play();
-                }, 100); // Atraso de 100 ms para evitar cliques acidentais
-            }
-        },
-        drag(event) {
-            if (!this.isDragging) return;
+        this.isDragging = true;  // Começa o arrasto
+        this.startX = event.clientX;
+        this.stop();  // Para a navegação automática enquanto está arrastando
+        this.changeCursor("grabbing");  // Altera o cursor para 'grabbing'
+    },
+    endDrag() {
+        if (this.isDragging) {
+            this.isDragging = false;  // Finaliza o arrasto
+            this.play();  // Retoma a navegação automática
+            this.changeCursor("grab");  // Volta o cursor para 'grab'
+        }
+    },
+    drag(event) {
+        if (!this.isDragging) return;  // Não faz nada se não estiver arrastando
 
-            const diff = event.clientX - this.startX;
-            if (Math.abs(diff) > 100 && !this.isSlideChanged) {
-                this.isSlideChanged = true;
-                if (diff > 0) {
-                    this.prev();
-                } else {
-                    this.next();
-                }
-                this.startX = event.clientX;
+        const diff = event.clientX - this.startX;
+        if (Math.abs(diff) > 200) {
+            if (diff > 0) {
+                this.prev();  // Vai para o slide anterior
+            } else {
+                this.next();  // Vai para o próximo slide
             }
-        },
-
+            this.startX = event.clientX;  // Atualiza a posição inicial para o próximo movimento
+        }
+    },
+    changeCursor(cursorStyle) {
+        const carousel = this.$refs.carousel;
+        carousel.style.cursor = cursorStyle;  // Altera o cursor do carrossel
+    },
         stop() {
-            clearInterval(this.timer);
+            clearInterval(this.timer);  // Para a navegação automática
         },
         play() {
             this.stop();
-            this.timer = setInterval(this.next, 4500);
+            this.timer = setInterval(this.next, 2900);  // Retoma a navegação automática a cada 3,4 segundos
         },
     },
-
     mounted() {
         this.play();
         const carousel = this.$refs.carousel;
@@ -117,9 +119,50 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .carousel-left-button, .carousel-right-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        height: 50px;
+        padding: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        width: 80px;
+
+        &:hover {
+            fill: red($color: #000000);
+        }
+        img{
+            max-width: 100%;
+        }
+    }
+
+    .carousel-left-button {
+        left: 140px; // Ajuste a posição conforme necessário
+        img{
+            transform: rotateY(180deg)
+
+        }
+    }
+
+    .carousel-right-button {
+        right: 140px; // Ajuste a posição conforme necessário
+    }
+}
+
 #carousel {
     width: 1000px;
-    height: 400px;
+    height: 500px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -127,7 +170,6 @@ export default {
     user-select: none;
     cursor: pointer;
     margin-top: 50px;
-    border: solid 1px #0f2034;
     border-radius: 20px;
 
     .carousel-slide {
@@ -137,21 +179,24 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         border-radius: 20px;
         cursor: grab;
+        background-position: center;
+        background-repeat: no-repeat;
 
         &.active {
+            display: flex;
+            transition: opacity 0.5s ease;
             opacity: 1;
         }
-        .img-content-slide {
-            width: 100%;
-            height: 100%;
+
+        &.no-click {
+            pointer-events: none;
+            cursor: grabbing;
         }
     }
 
@@ -187,20 +232,19 @@ export default {
         display: flex;
         justify-content: space-between;
         padding: 0 20px;
-
-        .prev-button,
-        .next-button {
-            cursor: pointer;
-            color: white;
-            font-size: 24px;
+        .carousel-prev{
+            .prev-button,
+            .next-button {
+                cursor: pointer;
+                color: white;
+                font-size: 24px;
+                img{
+                    max-width: 100%
+                }
+            }
         }
     }
 }
-.no-pointer {
-  pointer-events: none;
-}
-
-.clickable {
-  pointer-events: auto;
-}
 </style>
+
+
