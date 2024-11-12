@@ -27,9 +27,6 @@ body{
   background-color: #fdfdff;
   font-family: Rawline, Raleway, 'Open Sans', sans-serif, Arial, Helvetica !important;
 }
-ul, li {
-  list-style: none;
-}
 a{
   text-decoration: none;
 }

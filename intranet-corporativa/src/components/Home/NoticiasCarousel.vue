@@ -1,25 +1,24 @@
 <template lang="pug">
-    section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
-        div.carousel-controls.center
-            div.carousel-prev
-                a.prev-button.middle-indicator-text(@click="prev")
-                    i.material-icons.left chevron_left
-            div.carousel-next
-                a.next-button.middle-indicator-text(@click="next")
-                    i.material-icons.right chevron_right
-    
-        div.carousel-slide(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }")
-            router-link(:to="activeSlide.route" class="img-content-slide-link" @click.prevent="handleClick")
-                img.img-content-slide(:src="activeSlide.path" draggable="false")
+section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
+    div.carousel-controls.center
+        div.carousel-prev
+            a.prev-button.middle-indicator-text(@click="prev")
+                i.material-icons.left chevron_left
+        div.carousel-next
+            a.next-button.middle-indicator-text(@click="next")
+                i.material-icons.right chevron_right
 
+    div.carousel-slide(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }")
+        router-link(:to="activeSlide.route" 
+            :class="{'no-pointer': isDragging, 'clickable': !isDragging}" 
+            @click="handleClick")
+            img.img-content-slide(:src="activeSlide.path" draggable="false")
 
+    ul.carousel-indicators
+        li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
 
-
-        ul.carousel-indicators
-            li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
-            span
 </template>
-    
+
 <script>
 export default {
     data() {
@@ -29,9 +28,9 @@ export default {
             isDragging: false,
             startX: 0,
             slides: [
-                { title: "First Panel", path: require("../../assets/banner-seguranca.png"), route: "/pagina1" },
-                { title: "Second Panel", path: require("../../assets/img2.jpg"), route: "/pagina2" },
-                { title: "Third Panel", path: require("../../assets/img3.jpg"), route: "/pagina3" }
+                { title: "First Panel", path: require("../../assets/banner-seguranca.png"), route: "/topicos-seguranca" },
+                { title: "Second Panel", path: require("../../assets/img2.jpg"), route: "/fasciculo" },
+                { title: "Third Panel", path: require("../../assets/img3.jpg"), route: "/ransomware" }
             ],
         };
     },
@@ -54,6 +53,16 @@ export default {
         prev() {
             this.nbCurrent = this.nbCurrent <= 1 ? this.nbSlide : this.nbCurrent - 1;
         },
+
+        handleClick(event) {
+            // Apenas previne o clique se o slide estiver sendo arrastado
+            if (this.isDragging) {
+                event.preventDefault();
+            } else {
+                console.log("thales")
+            }
+        },
+
         startDrag(event) {
             this.isDragging = true;
             this.startX = event.clientX;
@@ -61,14 +70,13 @@ export default {
             this.isSlideChanged = false;
         },
         endDrag() {
-    if (this.isDragging) {
-        this.isDragging = false;
-        setTimeout(() => {
-            this.play();
-        }, 100); // Atraso de 100 ms para evitar cliques acidentais
-    }
-},
-
+            if (this.isDragging) {
+                this.isDragging = false;
+                setTimeout(() => {
+                    this.play();
+                }, 100); // Atraso de 100 ms para evitar cliques acidentais
+            }
+        },
         drag(event) {
             if (!this.isDragging) return;
 
@@ -83,6 +91,7 @@ export default {
                 this.startX = event.clientX;
             }
         },
+
         stop() {
             clearInterval(this.timer);
         },
@@ -107,7 +116,6 @@ export default {
 };
 </script>
 
-    
 <style lang="scss" scoped>
 #carousel {
     width: 1000px;
@@ -189,6 +197,10 @@ export default {
     }
 }
 .no-pointer {
-    pointer-events: none;
+  pointer-events: none;
+}
+
+.clickable {
+  pointer-events: auto;
 }
 </style>
