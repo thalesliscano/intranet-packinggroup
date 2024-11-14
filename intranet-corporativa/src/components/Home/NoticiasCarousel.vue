@@ -3,16 +3,17 @@
         div.carousel-left-button(@click="prev")
             img(src="@/assets/right-arrow.svg")
 
-        section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag" @mousemove="drag")
+        section#carousel(ref="carousel" @mousedown="startDrag" @mouseup="endDrag" @mouseleave="endDrag")
             div.carousel-controls.center
             div.carousel-slide(
                 v-for="(slide, index) in slides"
                 :key="index"
-                :class="{ active: nbCurrent === index + 1, 'no-click': isDragging && nbCurrent !== index + 1 }"
-                :style="{ backgroundImage: `url(${slide.path})`, backgroundSize: slide.backgroundSize }"
-                @click="goToSlideRoute(slide.route)"
+                :class="{ active: nbCurrent === index + 1 }"
+                :style="{ backgroundImage: `url(${slide.path})`, backgroundSize: slide.backgroundSize, backgroundPosition: slide.position }"
             )
-    
+                div.slide-content
+                        h2.slide-title {{ slide.title }}
+                        button.slide-button(@click="goToSlideRoute(slide.route)") Acessar
             ul.carousel-indicators
                 li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
         
@@ -28,12 +29,13 @@ export default {
         return {
             nbCurrent: 1,
             timer: null,
-            isDragging: false,  // Flag para controlar o estado de arrasto
+            isDragging: false,
+            isTransitioning: false,
             startX: 0,
             slides: [
-                { title: "Third Panel", path: require("../../assets/img3.jpg"), route: "/ransomware", backgroundSize: "50% 80%" },
-                { title: "First Panel", path: require("../../assets/banner-seguranca.jpg"), route: "/dicas-seguranca", backgroundSize: "60% 70%" },
-                { title: "Second Panel", path: require("../../assets/img2.jpg"), route: "", backgroundSize: "cover" },
+                { title: "RANSOMWARE", path: require("../../assets/img3.png"), route: "/ransomware", backgroundSize: "100% 100%", backgroundPosition: "100%" },
+                { title: "5 DICAS DE SEGURANÇA", path: require("../../assets/banner-seguranca.jpg"), route: "/dicas-seguranca", backgroundSize: "100% 100%" },
+                { title: "CODIGOS MALICIOSOS", path: require("../../assets/img2.png"), route: "", backgroundSize: "100% 110%" },
             ],
         };
     },
@@ -48,9 +50,9 @@ export default {
     methods: {
         goToSlideRoute(route) {
             if (!this.isDragging) {
-                const targetRoute = route || '/';  // Redireciona para '/home' se não houver um route
+                const targetRoute = route || '/';  
                 this.$router.push(targetRoute).then(() => {
-                    window.scrollTo(0, 0);  // Garante que a página será rolada para o topo
+                    window.scrollTo(0, 0); 
                 });
             }
         },
@@ -60,63 +62,71 @@ export default {
             this.nbCurrent = num;
         },
         next() {
-            this.nbCurrent = this.nbCurrent >= this.nbSlide ? 1 : this.nbCurrent + 1;
-        },
-        prev() {
-            this.nbCurrent = this.nbCurrent <= 1 ? this.nbSlide : this.nbCurrent - 1;
-        },
+        if (!this.isTransitioning) {
+            this.isTransitioning = true; 
+            this.nbCurrent = this.nbCurrent >= this.nbSlide ? 1 : this.nbCurrent + 1; // Transição contínua
+            setTimeout(() => {
+                this.isTransitioning = false; 
+            }, 500); 
+        }
+    },
+    prev() {
+        if (!this.isTransitioning) {
+            this.isTransitioning = true; 
+            this.nbCurrent = this.nbCurrent <= 1 ? this.nbSlide : this.nbCurrent - 1; // Transição contínua
+            setTimeout(() => {
+                this.isTransitioning = false; 
+            }, 500); 
+        }
+    },
         startDrag(event) {
-        this.isDragging = true;  // Começa o arrasto
-        this.startX = event.clientX;
-        this.stop();  // Para a navegação automática enquanto está arrastando
-        this.changeCursor("grabbing");  // Altera o cursor para 'grabbing'
-    },
-    endDrag() {
-        if (this.isDragging) {
-            this.isDragging = false;  // Finaliza o arrasto
-            this.play();  // Retoma a navegação automática
-            this.changeCursor("grab");  // Volta o cursor para 'grab'
-        }
-    },
-    drag(event) {
-        if (!this.isDragging) return;  // Não faz nada se não estiver arrastando
-
-        const diff = event.clientX - this.startX;
-        if (Math.abs(diff) > 200) {
-            if (diff > 0) {
-                this.prev();  // Vai para o slide anterior
-            } else {
-                this.next();  // Vai para o próximo slide
+            this.isDragging = true; 
+            this.startX = event.clientX;
+            this.stop();  
+            this.changeCursor("grabbing");  
+        },
+        endDrag() {
+            if (this.isDragging) {
+                this.isDragging = false; 
+                this.play(); 
+                this.changeCursor("grab");  
             }
-            this.startX = event.clientX;  // Atualiza a posição inicial para o próximo movimento
-        }
-    },
-    changeCursor(cursorStyle) {
-        const carousel = this.$refs.carousel;
-        carousel.style.cursor = cursorStyle;  // Altera o cursor do carrossel
-    },
+        },
+        drag(event) {
+            if (!this.isDragging || this.isTransitioning) return;
+
+            const diff = event.clientX - this.startX;
+            if (Math.abs(diff) > 200) {
+                if (diff > 0) {
+                    this.prev(); 
+                } else {
+                    this.next(); 
+                }
+                this.startX = event.clientX; 
+            }
+        },
+        changeCursor(cursorStyle) {
+            const carousel = this.$refs.carousel;
+            carousel.style.cursor = cursorStyle;  
+        },
         stop() {
-            clearInterval(this.timer);  // Para a navegação automática
+            clearInterval(this.timer);  
         },
         play() {
             this.stop();
-            this.timer = setInterval(this.next, 2900);  // Retoma a navegação automática a cada 3,4 segundos
+            this.timer = setInterval(this.next, 3500);  
         },
     },
     mounted() {
         this.play();
-        const carousel = this.$refs.carousel;
-        carousel.addEventListener("mouseover", this.stop);
-        carousel.addEventListener("mouseout", this.play);
     },
     beforeDestroy() {
         this.stop();
-        const carousel = this.$refs.carousel;
-        carousel.removeEventListener("mouseover", this.stop);
-        carousel.removeEventListener("mouseout", this.play);
     },
 };
+
 </script>
+
 
 <style lang="scss" scoped>
 .carousel-container {
@@ -138,17 +148,14 @@ export default {
         justify-content: center;
         z-index: 1;
         width: 80px;
-
-        &:hover {
-            fill: red($color: #000000);
-        }
         img{
+            z-index: 3;
             max-width: 100%;
         }
     }
 
     .carousel-left-button {
-        left: 140px; // Ajuste a posição conforme necessário
+        left: 80px; // Ajuste a posição conforme necessário
         img{
             transform: rotateY(180deg)
 
@@ -156,49 +163,93 @@ export default {
     }
 
     .carousel-right-button {
-        right: 140px; // Ajuste a posição conforme necessário
+        right: 80px; // Ajuste a posição conforme necessário
     }
 }
 
 #carousel {
-    width: 1000px;
-    height: 500px;
+    width: 100%;
+    height: 550px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
     background-color: white;
     user-select: none;
     cursor: pointer;
-    margin-top: 50px;
-    border-radius: 20px;
 
     .carousel-slide {
-        overflow: hidden;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+
+    &.active {
+        display: flex;
+    }
+
+    &.inactive {
+        display: flex;
+    }
+
+    &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        display: none;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .slide-content {
+        z-index: 2;
+        width: 300px;
+        display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        border-radius: 20px;
-        cursor: grab;
-        background-position: center;
-        background-repeat: no-repeat;
+        margin: 0 auto;
+        gap: 20px;
+        animation: fadeIn 2s forwards;
 
-        &.active {
-            display: flex;
-            transition: opacity 0.5s ease;
-            opacity: 1;
+        .slide-title {
+            color: #fff;
+            text-align: center;
+            font-size: 40px;
         }
 
-        &.no-click {
-            pointer-events: none;
-            cursor: grabbing;
+        .slide-button {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            color: #000;
+            font-weight: 600;
+            align-self: center;
+            border: 1px solid transparent;
+            cursor: pointer;
+            
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.89);
+                color: #000;
+                border: 1px solid #000;
+                font-weight: bold;
+                transform: scale(1.1);
+            }
         }
     }
+}
+
+
 
     .carousel-indicators {
         position: absolute;
@@ -245,6 +296,40 @@ export default {
         }
     }
 }
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes slideOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+    
 </style>
 
 
