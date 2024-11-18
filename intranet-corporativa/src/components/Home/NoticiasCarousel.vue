@@ -57,27 +57,30 @@ export default {
             }
         },
 
-        gotoSlide(num) {
-            if (num === this.nbCurrent) return;
-            this.nbCurrent = num;
-        },
         next() {
         if (!this.isTransitioning) {
-            this.isTransitioning = true; 
+            this.isTransitioning = true;
             this.nbCurrent = this.nbCurrent >= this.nbSlide ? 1 : this.nbCurrent + 1; // Transição contínua
             setTimeout(() => {
-                this.isTransitioning = false; 
-            }, 500); 
+                this.isTransitioning = false;
+            }, 500);
+            this.play(); // Reinicia o timer
         }
     },
     prev() {
         if (!this.isTransitioning) {
-            this.isTransitioning = true; 
+            this.isTransitioning = true;
             this.nbCurrent = this.nbCurrent <= 1 ? this.nbSlide : this.nbCurrent - 1; // Transição contínua
             setTimeout(() => {
-                this.isTransitioning = false; 
-            }, 500); 
+                this.isTransitioning = false;
+            }, 500);
+            this.play(); // Reinicia o timer
         }
+    },
+    gotoSlide(num) {
+        if (num === this.nbCurrent) return;
+        this.nbCurrent = num;
+        this.play(); // Reinicia o timer
     },
         startDrag(event) {
             this.isDragging = true; 

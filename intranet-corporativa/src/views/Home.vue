@@ -1,8 +1,8 @@
 <template lang="pug">
 .home-container
+    BannerSeguranca
     NoticiaCarrousel
     AtalhosImportantes
-    DicasSeguranca
     AppsCarousel
 </template> 
 
@@ -10,14 +10,14 @@
 import NoticiaCarrousel from "../components/Home/NoticiasCarousel.vue"
 import AtalhosImportantes from "../components/Home/AtalhosImportantes.vue"
 import AppsCarousel from "@/components/Home/AppsCarousel.vue";
-import DicasSeguranca from "@/components/Home/DicasSeguranca.vue";
+import BannerSeguranca from "@/components/Home/BannerSeguranca.vue";
 export default{
     name: "PageHome",
     components: {
         NoticiaCarrousel,
         AtalhosImportantes,
         AppsCarousel,
-        DicasSeguranca
+        BannerSeguranca
     }
 }
 </script>
