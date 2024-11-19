@@ -13,7 +13,7 @@
             )
                 div.slide-content
                         h2.slide-title {{ slide.title }}
-                        button.slide-button(@click="goToSlideRoute(slide.route)") Acessar
+                        button.slide-button(v-if="slide.type" @click="goToSlideRoute(slide.route)") Acessar
             ul.carousel-indicators
                 li(v-for="(slide, index) in slides" :key="index" :class="{ active: nbCurrent === index + 1 }" @click="gotoSlide(index + 1)")
         
@@ -33,9 +33,10 @@ export default {
             isTransitioning: false,
             startX: 0,
             slides: [
-                { title: "RANSOMWARE", path: require("../../assets/img3.png"), route: "/ransomware", backgroundSize: "100% 100%", backgroundPosition: "100%" },
-                { title: "5 DICAS DE SEGURANÇA", path: require("../../assets/banner-seguranca.jpg"), route: "/dicas-seguranca", backgroundSize: "100% 100%" },
-                { title: "CODIGOS MALICIOSOS", path: require("../../assets/img2.png"), route: "", backgroundSize: "100% 110%" },
+                { path: require("../../assets/BannerSeguranca.png"), backgroundSize: "100% 100%", backgroundPosition: "0", type: false },
+                { title: "RANSOMWARE", path: require("../../assets/img3.png"), route: "/ransomware", backgroundSize: "100% 100%", backgroundPosition: "100%", type: true },
+                { title: "5 DICAS DE SEGURANÇA", path: require("../../assets/banner-seguranca.jpg"), route: "/dicas-seguranca", backgroundSize: "100% 100%", type: true },
+                { title: "CODIGOS MALICIOSOS", path: require("../../assets/img2.png"), route: "", backgroundSize: "100% 110%", type: true},
             ],
         };
     },
@@ -117,7 +118,7 @@ export default {
         },
         play() {
             this.stop();
-            this.timer = setInterval(this.next, 3500);  
+            this.timer = setInterval(this.next, 5000);  
         },
     },
     mounted() {

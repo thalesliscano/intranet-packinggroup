@@ -2,101 +2,142 @@
 section.atalhos-container
     main.lista-atalhos-container
         ul.lista-atalhos-itens
-            li(v-for='item in itensAtalhos' :key="item.nome").item-atalho 
+            li(v-for='item in itensAtalhos' :key="item.nome" class="item-atalho" @click="navigateTo(item)").item-atalho 
                 .item-titulo
                     .container-img
                         img.item-img(:src="item.img")
                     p.item-nome {{item.nome}}
 
-                p.item-descricao {{ item.descricao}}
-                a(:href="item.link" v-if="item.nome != 'Documentação'").item-link Clique aqui
-                router-link(to="/documentacao" v-else).item-link Clique aqui
 
-</template> 
-    
+</template>
+
 
 <script>
-export default{
+export default {
     name: "SessaoImportante",
-    data(){
+    data() {
         return {
             itensAtalhos: [
                 {
-                    nome: "Segurança da Informação", link: "https://www.google.com", descricao: "A Segurança da Informação protege dados e sistemas contra acessos não autorizados, garantindo sua confidencialidade, integridade e disponibilidade.", img: require("../../assets/ciber-seguranca.png")
+                    nome: "Segurança da Informação",
+                    link: "https://www.google.com",
+                    img: require("../../assets/ciber-seguranca.png"),
                 },
                 {
-                    nome: "Sistema de Chamado",link: "https://www.google.com", descricao: "O Sistema de Chamado permite o registro e acompanhamento de solicitações, facilitando a comunicação e resolução de problemas.", img: require("../../assets/logo-glpi-bleu-1.png")
+                    nome: "Sistema de Chamado",
+                    link: "https://www.google.com",
+                    img: require("../../assets/logo-glpi-bleu-1.png"),
                 },
                 {
-                    nome: "Documentação",link: "https://www.google.com", descricao: "Aletas e Manutenção envolvem o monitoramento e cuidado de equipamentos, assegurando sua operação adequada e prevenindo falhas.", img: require("../../assets/manutencao.png")
+                    nome: "Documentação",
+                    link: "/documentacao",
+                    img: require("../../assets/manutencao.png"),
                 },
                 {
-                    nome: "Aletas e Manutenção",link: "https://www.google.com", descricao: "Aletas e Manutenção envolvem o monitoramento e cuidado de equipamentos, assegurando sua operação adequada e prevenindo falhas.", img: require("../../assets/manutencao.png")
+                    nome: "Aletas e Manutenção",
+                    link: "https://www.google.com",
+                    img: require("../../assets/manutencao.png"),
                 },
-            ]
-        }
-    }
-}
+            ],
+        };
+    },
+    methods: {
+        navigateTo(item) {
+            if (item.link.startsWith("http")) {
+                // Redirecionar para URLs externas
+                window.open(item.link, "_blank"); // "_blank" abre em uma nova aba
+            } else {
+                // Redirecionar para rotas internas
+                this.$router.push(item.link);
+            }
+        },
+    },
+};
+
 </script>
 
 <style lang="scss">
 .atalhos-container {
     margin-top: 50px;
+
     .titulo-atalhos {
         margin-top: 30px;
         font-size: 30px;
         text-align: center;
 
     }
-    .lista-atalhos-container{   
+
+    .lista-atalhos-container {
         width: 1000px;
         margin: 0 auto;
         padding: 40px;
-        .lista-atalhos-itens{
-            display: flex;
-            justify-content: center;
-            gap: 30px;
+
+        .lista-atalhos-itens {
             .item-atalho {
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 gap: 10px;
                 background-color: #fff;
-                border: 1px solid ;
+                border: 3px solid #0f2034;
                 padding: 10px;
-                border-radius: 10px;
-                .item-titulo{
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+                cursor: pointer;
+                box-sizing: border-box; // Inclui bordas no cálculo de tamanho
+                overflow: hidden; // Garante que o conteúdo "extra" fique contido
+                transition: background-color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+
+                &:hover {
+                    background-color: #0f2034; // Cor de fundo ao passar o mouse
+                    transform: scale(1.1); // Efeito de zoom
+                    filter: brightness(88%);
+                    color: #fff;
+
+                    // Aplicar mudanças à imagem no hover
+                    .item-img {
+                        filter: brightness(120%); // Aumenta brilho da imagem
+                        transform: scale(1.2); // Efeito de zoom na imagem
+                        transition: filter 0.3s ease, transform 0.3s ease;
+                    }
+
+                    // Alterar texto também, se necessário
+                    .item-nome {
+                        color: #fff; // Mudar cor do texto
+                        transition: color 0.3s ease;
+                    }
+                }
+
+                .item-titulo {
                     display: flex;
                     align-items: center;
-                    gap: 10px;
+                    flex-direction: column;
+                    text-align: center;
                     justify-content: center;
-                    .item-nome{
+                    background-color: transparent; // Deixe o fundo transparente para não interferir
+
+                    .item-nome {
                         font-size: 20px;
+                        color: #000;
+                        transition: color 0.3s ease;
                     }
-                    .container-img{
+
+                    .container-img {
                         width: 40px;
-                        .item-img{
+                        height: 35px;
+
+                        .item-img {
                             max-width: 100%;
-                            height: 35px;
+                            height: 100%;
+                            transition: filter 0.3s ease, transform 0.3s ease; // Suaviza transformações
                         }
                     }
                 }
             }
-            .item-link{
-                align-self: flex-end;
-                justify-self: flex-end;
-                border-radius: 10px;
-                padding: 6px 7px 5px 8px;
-                color: #000;
-                border: 1px solid;
-                position: relative;
-                font-weight: 500;
-                &:hover{
-                    background-color: #0f2034;
-                    color: #fff;
-                }
-            }
         }
+
     }
 }
-
 </style>
