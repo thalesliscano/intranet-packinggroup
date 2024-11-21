@@ -152,10 +152,19 @@ export default {
         justify-content: center;
         z-index: 1;
         width: 80px;
-        img{
-            z-index: 3;
+        fill: transparent;
+        filter: grayscale(100%) opacity(50%);
+        img {
+            z-index: 1;
             max-width: 100%;
+            transition: filter 0.3s ease; // Suaviza a transição
+            filter: brightness(100%) opacity(20%);
         }
+
+        &:hover img {
+            filter: brightness(100%) opacity(100%); // Torna o SVG branco
+        }
+
     }
 
     .carousel-left-button {
@@ -216,7 +225,7 @@ export default {
     }
 
     .slide-content {
-        z-index: 2;
+        z-index: 1;
         width: 300px;
         display: flex;
         flex-direction: column;
@@ -229,6 +238,8 @@ export default {
             color: #fff;
             text-align: center;
             font-size: 40px;
+            z-index: 1;
+
         }
 
         .slide-button {
@@ -269,8 +280,8 @@ export default {
             background-color: #ffffff;
             border: solid 1px;
             border-radius: 50%;
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
             margin: 0 5px;
             cursor: pointer;
 

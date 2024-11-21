@@ -38,6 +38,16 @@ export default {
                     link: "https://www.google.com",
                     img: require("../../assets/manutencao.png"),
                 },
+                {
+                    nome: "Aletas e Manutenção",
+                    link: "https://www.google.com",
+                    img: require("../../assets/manutencao.png"),
+                },
+                {
+                    nome: "Aletas e Manutenção",
+                    link: "https://www.google.com",
+                    img: require("../../assets/manutencao.png"),
+                },
             ],
         };
     },
@@ -73,9 +83,13 @@ export default {
         padding: 40px;
 
         .lista-atalhos-itens {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+
             .item-atalho {
                 display: flex;
-                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 10px;
@@ -94,20 +108,6 @@ export default {
                     background-color: #0f2034; // Cor de fundo ao passar o mouse
                     transform: scale(1.1); // Efeito de zoom
                     filter: brightness(88%);
-                    color: #fff;
-
-                    // Aplicar mudanças à imagem no hover
-                    .item-img {
-                        filter: brightness(120%); // Aumenta brilho da imagem
-                        transform: scale(1.2); // Efeito de zoom na imagem
-                        transition: filter 0.3s ease, transform 0.3s ease;
-                    }
-
-                    // Alterar texto também, se necessário
-                    .item-nome {
-                        color: #fff; // Mudar cor do texto
-                        transition: color 0.3s ease;
-                    }
                 }
 
                 .item-titulo {
@@ -116,12 +116,14 @@ export default {
                     flex-direction: column;
                     text-align: center;
                     justify-content: center;
-                    background-color: transparent; // Deixe o fundo transparente para não interferir
+                    background-color: transparent; // Fundo transparente para evitar interferência
+                    gap: 5px;
+
 
                     .item-nome {
                         font-size: 20px;
-                        color: #000;
-                        transition: color 0.3s ease;
+                        color: #000; // Cor padrão do texto
+                        transition: color 0.3s ease; // Suaviza a transição de cor
                     }
 
                     .container-img {
@@ -131,10 +133,13 @@ export default {
                         .item-img {
                             max-width: 100%;
                             height: 100%;
-                            transition: filter 0.3s ease, transform 0.3s ease; // Suaviza transformações
+                            transition: filter 0.3s ease, transform 0.3s ease; // Suaviza as transições de transformações
                         }
                     }
                 }
+                &:hover > .item-titulo > .item-nome {
+                        color: #fff !important; // Usa !important caso algum estilo global esteja interferindo
+                    }
             }
         }
 

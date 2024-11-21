@@ -100,7 +100,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .container-nav-ti {
     width: 100%;
     margin: 0 auto;
