@@ -45,7 +45,7 @@ a{
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 2;
+    z-index: 3;
     background-color: #fff;
   }
 }
