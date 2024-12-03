@@ -11,7 +11,7 @@
         .conteudo
           h2.title-dica(v-if="!item.isHovered" class="fade") {{ item.title }}
           p.descricao-dica(v-else class="fade") {{ item.description }}
-          button.button-dica Clique aqui
+          button(@click="navigateTo(item)").button-dica Clique aqui
 </template>
   
   
@@ -20,43 +20,76 @@
 export default {
   name: "BannerSeguranca",
   data() {
-    return {
-      conteudoDicas: [
-        {
-          title: "Titulo 1",
-          description: "Esta é a descrição do item 1 bla bla bla bla bla",
-          defaultImage: require("../../assets/banner-seguranca.jpg"),
-          hoverImage: require("../../assets/img3.png"),
-          backgroundSize: "100% 100%",
-          position: "center",
-          isHovered: false,
-        },
-        {
-          title: "Titulo 2",
-          description: "Esta é a descrição do item 2 sdfd ddkdk thales jhonny lindos",
-          defaultImage: require("../../assets/banner-seguranca.jpg"),
-          hoverImage: require("../../assets/img3.png"),
-          backgroundSize: "100% 100%",
-          position: "center",
-          isHovered: false,
-        },
-        {
-          title: "Titulo 3",
-          description: "Esta é a descrição do item 3 eba kejlje ekjklj kl he lorem ipsum hffj djdj ",
-          defaultImage: require("../../assets/banner-seguranca.jpg"),
-          hoverImage: require("../../assets/img3.png"),
-          backgroundSize: "100% 100%",
-          position: "center",
-          isHovered: false,
-        },
-      ],
-    };
-  },
+  return {
+    conteudoDicas: [
+      {
+        title: "Ransomware",
+        description: "Esta é a descrição do item 1 bla bla bla bla bla",
+        defaultImage: require("../../assets/img3.png"),
+        defaultImageOriginal: require("../../assets/img3.png"), // Aqui fica a imagem padrão original
+        hoverImage: require("../../assets/img-default.png"),
+        backgroundSize: "100% 100%",
+        position: "center",
+        isHovered: false,
+        link: "/ransomware"
+      },
+      {
+        title: "5 dicas de segurança",
+        description: "Esta é a descrição do item 2 sdfd ddkdk",
+        defaultImage: require("../../assets/banner-seguranca.jpg"),
+        defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
+        hoverImage: require("../../assets/img-default.png"),
+        backgroundSize: "100% 100%",
+        position: "center",
+        isHovered: false,
+      },
+      {
+        title: "Titulo 3",
+        description: "Esta é a descrição do item 3 eba kejlje ekjklj kl he lorem ipsum hffj djdj ",
+        defaultImage: require("../../assets/banner-seguranca.jpg"),
+        defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
+        hoverImage: require("../../assets/img3.png"),
+        backgroundSize: "100% 100%",
+        position: "center",
+        isHovered: false,
+      },
+      {
+        title: "Titulo 3",
+        description: "Esta é a descrição do item 3 eba kejlje ekjklj kl he lorem ipsum hffj djdj ",
+        defaultImage: require("../../assets/banner-seguranca.jpg"),
+        defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
+        hoverImage: require("../../assets/img3.png"),
+        backgroundSize: "100% 100%",
+        position: "center",
+        isHovered: false,
+      },
+      {
+        title: "Titulo 3",
+        description: "Esta é a descrição do item 3 eba kejlje ekjklj kl he lorem ipsum hffj djdj ",
+        defaultImage: require("../../assets/banner-seguranca.jpg"),
+        defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
+        hoverImage: require("../../assets/img3.png"),
+        backgroundSize: "100% 100%",
+        position: "center",
+        isHovered: false,
+      },
+    ],
+  };
+},
   methods: {
     atualizarHover(index, isHover) {
-      const item = this.conteudoDicas[index];
-      item.defaultImage = isHover ? item.hoverImage : require("../../assets/banner-seguranca.jpg");
-      item.isHovered = isHover;
+    const item = this.conteudoDicas[index];
+    item.defaultImage = isHover ? item.hoverImage : item.defaultImageOriginal;
+    item.isHovered = isHover;
+  },
+    navigateTo(item) {
+        if (item.link.startsWith("http")) {
+            // Redirecionar para URLs externas
+            window.open(item.link, "_blank"); // "_blank" abre em uma nova aba
+        } else {
+            // Redirecionar para rotas internas
+            this.$router.push(item.link);
+        }
     },
   },
 };
@@ -66,7 +99,7 @@ export default {
   <style lang="scss" scoped>
   .banner-seguranca {
     margin: 60px auto;
-    width: 1000px;
+    width: 1400px;
     .titulo{
       text-align: center;
       margin-bottom: 30px;
