@@ -42,9 +42,10 @@ export default {
         backgroundSize: "100% 100%",
         position: "center",
         isHovered: false,
+        link: "/dicas-seguranca"
       },
       {
-        title: "Titulo 3",
+        title: "Proteção de dados",
         description: "Esta é a descrição do item 3 eba kejlje ekjklj kl he lorem ipsum hffj djdj ",
         defaultImage: require("../../assets/banner-seguranca.jpg"),
         defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
@@ -52,6 +53,8 @@ export default {
         backgroundSize: "100% 100%",
         position: "center",
         isHovered: false,
+        link: "/fasciculo-protecao-de-dados"
+
       },
       {
         title: "Titulo 3",

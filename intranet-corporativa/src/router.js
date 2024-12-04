@@ -39,8 +39,8 @@ const router = new Router({
             component: RansomwarePage
         },
         {
-            path: "/fasciculo",
-            name: "FASCICULO",
+            path: "/fasciculo-protecao-de-dados",
+            name: "FASCICULO-DADOS",
             component: FasciculoPage
         },
     ],
