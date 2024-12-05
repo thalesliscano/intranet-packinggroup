@@ -5,7 +5,8 @@ import PageDocumentacao from "./views/Documentacao.vue";
 import PageTreinamento from "./views/Treinamento.vue";
 import TopicosSeguranca from "./views/TopicosSeguranca.vue";
 import RansomwarePage from "./views/RansomwarePage.vue";
-import FasciculoPage from "./views/FasciculoPage.vue";
+import FasciculoDados from "./views/FasciculoDados.vue";
+import FasciculoCodigosMaliciosos from "./views/FasciculoCodigosMaliciosos.vue"
 
 Vue.use(Router);
 
@@ -41,7 +42,12 @@ const router = new Router({
         {
             path: "/fasciculo-protecao-de-dados",
             name: "FASCICULO-DADOS",
-            component: FasciculoPage
+            component: FasciculoDados
+        },
+        {
+            path: "/fasciculo-codigos-maliciosos",
+            name: "FASCICULO-CODIGO-MALICIOSOS",
+            component: FasciculoCodigosMaliciosos
         },
     ],
     scrollBehavior() {

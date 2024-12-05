@@ -1,11 +1,11 @@
 <template lang="pug">
-.FasciculoPage
+.FasciculoDados
     h1 fasciculo
 </template>
 
 <script>
 export default {
-    name: "FasciculoPage",
+    name: "FasciculoDados",
 };
 </script>
 

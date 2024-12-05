@@ -53,7 +53,7 @@ export default {
         backgroundSize: "100% 100%",
         position: "center",
         isHovered: false,
-        link: "/fasciculo-protecao-de-dados"
+        link: "/fasciculo-codigos-maliciosos"
 
       },
       {
@@ -65,6 +65,8 @@ export default {
         backgroundSize: "100% 100%",
         position: "center",
         isHovered: false,
+        link: "/fasciculo-protecao-de-dados"
+
       },
       {
         title: "Titulo 3",
