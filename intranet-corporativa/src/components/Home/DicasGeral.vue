@@ -24,7 +24,7 @@ export default {
     conteudoDicas: [
       {
         title: "Ransomware",
-        description: "Esta é a descrição do item 1 bla bla bla bla bla",
+        description: "Ransomware é um tipo de código malicioso que torna inacessíveis os...",
         defaultImage: require("../../assets/img3.png"),
         defaultImageOriginal: require("../../assets/img3.png"), // Aqui fica a imagem padrão original
         hoverImage: require("../../assets/img-default.png"),
@@ -35,7 +35,7 @@ export default {
       },
       {
         title: "5 dicas de segurança",
-        description: "Esta é a descrição do item 2 sdfd ddkdk",
+        description: "O primeiro e principal sinal para saber se um site é seguro é observar se ele possui o certificado...",
         defaultImage: require("../../assets/banner-seguranca.jpg"),
         defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
         hoverImage: require("../../assets/img-default.png"),
@@ -46,7 +46,7 @@ export default {
       },
       {
         title: "Proteção de dados",
-        description: "Esta é a descrição do item 3 eba kejlje ekjklj kl he lorem ipsum hffj djdj ",
+        description: "Códigos maliciosos, também conhecidos como pragas e malware, são programas...",
         defaultImage: require("../../assets/banner-seguranca.jpg"),
         defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
         hoverImage: require("../../assets/img3.png"),
@@ -58,7 +58,7 @@ export default {
       },
       {
         title: "Titulo 3",
-        description: "Esta é a descrição do item 3 eba kejlje ekjklj kl he lorem ipsum hffj djdj ",
+        description: "Esta é a descrição do item 3",
         defaultImage: require("../../assets/banner-seguranca.jpg"),
         defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
         hoverImage: require("../../assets/img3.png"),
@@ -70,7 +70,7 @@ export default {
       },
       {
         title: "Titulo 3",
-        description: "Esta é a descrição do item 3 eba kejlje ekjklj kl he lorem ipsum hffj djdj ",
+        description: "Esta é a descrição do item 3",
         defaultImage: require("../../assets/banner-seguranca.jpg"),
         defaultImageOriginal: require("../../assets/banner-seguranca.jpg"),
         hoverImage: require("../../assets/img3.png"),
