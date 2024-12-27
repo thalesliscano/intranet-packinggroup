@@ -122,7 +122,7 @@ li {
                     width: 100%;
                     margin: 0 auto;
                     text-align: start;
-                    margin-bottom: 5px;
+                    margin-bottom:  5px;
                 }
 
                 .texto {
