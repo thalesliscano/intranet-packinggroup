@@ -37,49 +37,6 @@ export default {
                     texto: "programa que torna inacessíveis os dados armazenados em um equipamento, geralmente usando criptografia, e que exige pagamento de resgate para restabelecer o acesso ao usuário"
                 },
             ],
-            conteudoPageDois: [
-                {
-                    img: require("../../assets/fasciculos/img-3-codigos-maliciosos.jpg"),
-                    titulo: "BACKDOOR",
-                    texto: "programa que permite o retorno de um invasor a um equipamento comprometido, por meio da inclusão de serviços criados ou modificados para este fim.",
-                    width: "300px",
-                    blue: true,
-                },
-                {
-                    img: require("../../assets/fasciculos/img-4-codigos-maliciosos.jpg"),
-                    titulo: "WORM",
-                    texto: "programa capaz de se propagar automaticamente pelas redes, explorando vulnerabilidades nos programas instalados e enviando cópias de si mesmo de equipamento para equipamento.",
-                    width: "200px",
-                    blue: true,
-                },
-                {
-                    img: require("../../assets/fasciculos/img-5-codigos-maliciosos.png"),
-                    titulo: "RAT (REMOTE  ACCESS TROJAN)",
-                    texto: "ou trojan de acesso remoto, é um programa que combina as características de trojan e de backdoor, já que permite ao atacante acessar o equipamento remotamente e executar ações como se fosse o usuário.",
-                    width: "300px",
-                    blue: false,
-                },
-                {
-                    img: require("../../assets/fasciculos/img-6-codigos-maliciosos.png"),
-                    titulo: "BOT",
-                    texto: "programa similar ao worm e que possui mecanismos de comunicação com o invasor que permitem que ele seja remotamente controlado.",
-                    width: "300px",
-                    blue: true,
-                },
-            ],
-            conteudoPageTres:[
-                    {
-                        img: require("../../assets/fasciculos/img-7-codigos-maliciosos.jpg"),
-                        titulo: "ZUMBI",
-                        texto: "é como também é chamado um equipamento infectado por um bot, pois pode ser controlado remotamente, sem o conhecimento do seu dono."
-                    },
-                    {
-                        img: require("../../assets/fasciculos/img-6-codigos-maliciosos.png"),
-                        titulo: "BOTNET",
-                        texto: "é uma rede formada por centenas ou milhares de equipamentos zumbis e que permite potencializar as ações danosas executadas pelos bots."
-                    },
-
-            ]
         }
     }
 };

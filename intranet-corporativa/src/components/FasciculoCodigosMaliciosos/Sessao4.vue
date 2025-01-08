@@ -1,57 +1,91 @@
-"<template lang="pug">
-.sessao-quatro
-    ul.container-texto
-        li.conteudo(v-for="conteudo in conteudosPageUm")
-            div(:class="conteudo.classe")
-                img(:src="conteudo.img")
-            h3.titulo {{ conteudo.titulo}}
-            p.texto {{ conteudo.texto}}
-
-
-</template>"
+<template lang="pug">
+    .sessao-quatro
+        ul.container-texto
+            li.conteudo(v-for="conteudo in conteudos")
+                div.container-img(:style="{ width: conteudo.width || 'auto'}")
+                    img(:src="conteudo.img" :style="{ height: conteudo.height || 'auto', margin: conteudo.margin}")
+                h3.titulo(:style="{textAlign: conteudo.textoCentro || 'auto', width: conteudo.tamanhoTexto}" :class="conteudo.classe || ''") {{ conteudo.titulo}}
+                p.texto(:style="{width: conteudo.tamanhoTexto}") {{ conteudo.texto}}
     
-    <script>
-    export default {
-        name: "SessaoQuatro",
-        data() {
-            return {
-                conteudosPageUm: [
-                    {
-                        img: require("../../assets/fasciculos/img-9-codigos-maliciosos.jpg"),
-                        titulo: "SPYWARE",
-                        texto: "programa projetado para monitorar as atividades de um sistema e enviar as informações coletadas para terceiros.",
-                        classe: "img-spyware",
-                    },
-                    {
-                        img: require("../../assets/fasciculos/img-10-codigos-maliciosos.jpg"),
-                        titulo: "KYELOGGER",
-                        texto: "é um tipo de spyware capaz de  capturar e armazenar as teclas digitadas pelo usuário no teclado do equipamento.",
-                        classe: "img-keylogger",
-                    },
-                    {
-                        img: require("../../assets/fasciculos/img-11-codigos-maliciosos.jpg"),
-                        titulo: "SCREENLOGGER",
-                        texto: "é um tipo de spyware, similar ao keylogger, usado por atacantes para capturar as teclas digitadas pelos usuários em teclados virtuais, disponíveis principalmente em sites de Internet Banking.",
-                        classe: "img-screenlogger",
-                    },
-                    {
-                        img: require("../../assets/fasciculos/img-12-codigos-maliciosos.jpg"),
-                        titulo: "ADWARE",
-                        texto: "é um tipo de spyware projetado especificamente para apresentar propagandas.",
-                        classe: "img-adware",
-                    },
-                    {
-                        img: require("../../assets/fasciculos/img-13-codigos-maliciosos.png"),
-                        titulo: "ROOTKIT",
-                        texto: "conjunto de programas e técnicas que permite esconder e assegurar a presença de um invasor ou de outro código malicioso em um equipamento comprometido.",
-                        classe: "img-rootkit",
-                    },
-                ]
-            }
-        }
-    };
-    </script>
-    
+            ul.conteudo2
+                li(v-for="(conteudo, index) in conteudos2" :key="'conteudo2-' + index")
+                    div.container-img(:style="{ width: conteudo.width || 'auto'}")
+                        img(:src="conteudo.img")
+                    h3.titulo(:style="{textAlign: conteudo.textoCentro || 'auto', width: conteudo.tamanhoTexto}" :class="conteudo.classe || ''") {{ conteudo.titulo}}
+                    p.texto(:style="{width: conteudo.tamanhoTexto}") {{ conteudo.texto}}
+    </template>
+
+<script>
+export default {
+    name: "SessaoQuatro",
+    data() {
+        return {
+            conteudos: [
+                {
+                    img: require("../../assets/fasciculos/img-3-codigos-maliciosos.jpg"),
+                    titulo: "BACKDOOR",
+                    texto: "programa que permite o retorno de um invasor a um equipamento comprometido, por meio da inclusão de serviços criados ou modificados para este fim.",
+                    width: "300px",
+                    blue: true,
+                    tamanhoTexto: "180px",
+                    textoCentro: "center",
+                },
+                {
+                    img: require("../../assets/fasciculos/img-4-codigos-maliciosos.jpg"),
+                    titulo: "WORM",
+                    texto: "programa capaz de se propagar automaticamente pelas redes, explorando vulnerabilidades nos programas instalados e enviando cópias de si mesmo de equipamento para equipamento.",
+                    height: "220px",
+                    blue: true,
+                    tamanhoTexto: "400px",
+                },
+                {
+                    img: require("../../assets/fasciculos/img-5-codigos-maliciosos.png"),
+                    titulo: "RAT (REMOTE  ACCESS TROJAN)",
+                    texto: "ou trojan de acesso remoto, é um programa que combina as características de trojan e de backdoor, já que permite ao atacante acessar o equipamento remotamente e executar ações como se fosse o usuário.",
+                    width: "300px",
+                    height: "250px",
+                    blue: false,
+                    tamanhoTexto: "180px",
+                    textoCentro: "center",
+                    classe: "titulo-azul",
+                    marginTop: "100px"
+
+                },
+                {
+                    img: require("../../assets/fasciculos/img-6-codigos-maliciosos.png"),
+                    titulo: "BOT",
+                    texto: "programa similar ao worm e que possui mecanismos de comunicação com o invasor que permitem que ele seja remotamente controlado.",
+                    width: "300px",
+                    height: "250px",
+                    margin: "0px 100px 0px 100px",
+                    blue: true,
+                    tamanhoTexto: "400px",
+
+                },
+            ],
+            conteudos2: [
+                {
+                    img: require("../../assets/fasciculos/img-7-codigos-maliciosos.jpg"),
+                    titulo: "ZUMBI",
+                    texto: "é como também é chamado um equipamento infectado por um bot, pois pode ser controlado remotamente, sem o conhecimento do seu dono.",
+                    tamanhoTexto: "200px",
+                    width: "200px",
+                    classe: "titulo-azul"
+                },
+                {
+                    img: require("../../assets/fasciculos/img-8-codigos-maliciosos.png"),
+                    titulo: "BOTNET",
+                    texto: "é uma rede formada por centenas ou milhares de equipamentos zumbis e que permite potencializar as ações danosas executadas pelos bots.",
+                    tamanhoTexto: "200px",
+                    width: "200px",
+                    classe: "titulo-azul"
+                },
+            ],
+        };
+    },
+};
+</script>
+
 <style scoped lang="scss">
 ul,
 li {
@@ -62,50 +96,56 @@ li {
     width: 100%;
     height: 100%;
     margin: 60px auto 0px auto;
+
+    .container-img {
+        width: 300px;
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+
     .container-texto {
         justify-content: center;
         display: grid;
-        grid-template-columns: 450px 175px 175px;
-        gap: 20px;
-        margin: 0 auto;
+        grid-template-columns: 300px 500px;
+        gap: 0px;
+
+        // margin: 0 auto;
         .conteudo {
             .titulo {
-                color: #DA4731;
+                color: #da4731;
                 font-size: 20px;
                 width: 100%;
                 margin: 0 auto;
                 text-align: start;
-                margin-bottom:  5px;
+                margin-bottom: 5px;
             }
 
             .texto {
                 text-align: start;
                 font-size: 16px;
+                margin: 0 auto;
             }
         }
 
+        .conteudo2 {
+            grid-column: 2;
+            /* Adicionando esta linha para posicionar a lista na segunda coluna */
+            margin-top: 20px;
+            /* Se necessário, ajusta a margem superior */
+            display: flex;
+            gap: 15px;
+            position: relative;
+            top: -120px;
+            margin: 0 auto;
+        }
     }
+
     .titulo-azul {
-        color: #6EADFF !important;
-    }
-
-    .img-spyware {
-            width: 450px;
-            img {
-            max-width: 100%;
-            display: block;
-
-        }
-    }
-    .img-keylogger {
-            width: 175px;
-            img {
-            max-width: 100%;
-            display: block;
-
-        }
+        color: #6eadff !important;
     }
 }
-
-
 </style>
