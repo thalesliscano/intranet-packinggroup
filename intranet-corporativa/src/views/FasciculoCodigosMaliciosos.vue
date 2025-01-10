@@ -5,6 +5,7 @@
   SessaoTres
   SessaoQuatro
   SessaoCinco
+  SessaoSeis
 </template>
 
 <script>
@@ -13,6 +14,7 @@ import SessaoDois from '../components/FasciculoCodigosMaliciosos/Sessao2.vue';
 import SessaoTres from '../components/FasciculoCodigosMaliciosos/Sessao3.vue';
 import SessaoQuatro from '../components/FasciculoCodigosMaliciosos/Sessao4.vue';
 import SessaoCinco from '../components/FasciculoCodigosMaliciosos/Sessao5.vue';
+import SessaoSeis from '../components/FasciculoCodigosMaliciosos/Sessao6.vue';
 export default {
   name: "FasciculoCodigosMaliciosos",
   components: {
@@ -20,7 +22,8 @@ export default {
     SessaoDois,
     SessaoTres,
     SessaoQuatro,
-    SessaoCinco
+    SessaoCinco,
+    SessaoSeis
   }
 };
 </script>
