@@ -1,5 +1,5 @@
 <template lang="pug">
-.sessao-cinco
+.sessao-seis
     ul.container-texto
         li.conteudo1
             h1.titulo(:style="{textAlign: conteudo1.textoCentro || 'auto'}" :class="conteudo1.classe || ''") {{ conteudo1.tituloGrande }}
@@ -94,10 +94,10 @@ li {
     list-style: none;
 }
 
-.sessao-cinco {
+.sessao-seis {
     width: 100%;
     height: 100%;
-    margin: 10px auto 0px auto;
+    margin: 60px auto 0px auto;
 
     .container-img {
         img {
@@ -108,6 +108,7 @@ li {
     }
 
     .container-texto {
+        height: 1000px;
         justify-content: center;
         display: grid;
         gap: 30px;
