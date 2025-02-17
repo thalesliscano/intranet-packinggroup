@@ -2,7 +2,7 @@
 header.container-nav-ti
     nav.nav-ti
         router-link.link-to-home(to="/")
-            img.logo(src="https://packinggroup.com.br/imagens/logo-packing-group.png" alt="logo")
+            img.logo(src="https://static.wixstatic.com/media/86b5c3_41528b2f4fc546629d5c110bddda45ed~mv2.png/v1/crop/x_0,y_5,w_1677,h_833/fill/w_97,h_49,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo%20PACKING%20GROUP%20BRANCO2.png" alt="logo")
         .conteudo-navegacao
             .background-btn
                 router-link(to="/" exact ).btn-navegacao Home
@@ -112,7 +112,11 @@ export default {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         padding: 5px 50px 5px 50px;
 
-
+        .logo{
+            background-color: #000000;
+            height: 80px;
+            width: 90%;
+        }
         .link-to-home {
             display: flex;
             align-items: center;

@@ -26,6 +26,7 @@ export default {
 body{
   background-color: #fdfdff;
   font-family: Rawline, Raleway, 'Open Sans', sans-serif, Arial, Helvetica !important;
+  overflow-x: hidden
 }
 a{
   text-decoration: none;
